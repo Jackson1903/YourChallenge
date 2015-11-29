@@ -15,14 +15,20 @@ class LoginManager: RestClientMessage
     
     func getLoginUser(post: String, serviceToBaseUrl: String) -> NSString
     {
-        var restClientMss = RestClientMessage()
-        var baseUrl:String = constants.baseURL + serviceToBaseUrl
+        let restClientMss = RestClientMessage()
+        let baseUrl:String = constants.baseURL + serviceToBaseUrl
         var reponseError: NSError?
         var response: NSURLResponse?
         var resultMessage:NSString = ""
         
-        var request:NSMutableURLRequest = restClientMss.getConnection(baseUrl, paramPost:post)
-        var urlData: NSData? = NSURLConnection.sendSynchronousRequest(request, returningResponse:&response, error:&reponseError)
+        let request:NSMutableURLRequest = restClientMss.getConnection(baseUrl, paramPost:post)
+        var urlData: NSData?
+        do {
+            urlData = try NSURLConnection.sendSynchronousRequest(request, returningResponse:&response)
+        } catch let error as NSError {
+            reponseError = error
+            urlData = nil
+        }
         
         if  urlData != nil  {
             
@@ -33,7 +39,7 @@ class LoginManager: RestClientMessage
                 var responseData:NSString  = NSString(data:urlData!, encoding:NSUTF8StringEncoding)!
                 var error: NSError?
                 
-                let jsonData:NSDictionary = NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers , error: &error) as! NSDictionary
+                let jsonData:NSDictionary = (try! NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers )) as! NSDictionary
                 
                 //Obtiene información Header
                 let header:NSDictionary = jsonData.valueForKey("header") as! NSDictionary
@@ -53,7 +59,7 @@ class LoginManager: RestClientMessage
                     let token:NSString = header.valueForKey("token") as! NSString
                     let key:NSString = body.valueForKey("idPlayer") as! NSString
                     
-                    var prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+                    let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
                     prefs.setObject(userName, forKey: "userName")
                     prefs.setObject(email, forKey: "email")
                     prefs.setObject(token, forKey: "token")

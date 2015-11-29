@@ -66,7 +66,7 @@ class UpdateUserVC: UIViewController, SBPickerSelectorDelegate, UITextFieldDeleg
     
     
     @IBAction func openImage(sender: AnyObject) {
-        var image = UIImagePickerController()
+        let image = UIImagePickerController()
         image.delegate = self
         image.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
         image.allowsEditing = false
@@ -77,7 +77,7 @@ class UpdateUserVC: UIViewController, SBPickerSelectorDelegate, UITextFieldDeleg
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
         
-        println("Image Selected")
+        print("Image Selected")
         
         self.dismissViewControllerAnimated(true, completion: nil)
         
@@ -134,7 +134,7 @@ class UpdateUserVC: UIViewController, SBPickerSelectorDelegate, UITextFieldDeleg
         picker.showPickerIpadFromRect(frame, inView: view)
         */
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("MapViewController") as! UIViewController
+        let vc = storyboard.instantiateViewControllerWithIdentifier("MapViewController") 
         self.navigationController?.pushViewController(vc, animated: true)
         
         //self.performSegueWithIdentifier("go_to", sender: self)
@@ -146,16 +146,16 @@ class UpdateUserVC: UIViewController, SBPickerSelectorDelegate, UITextFieldDeleg
         pickerSelected=2
         let picker: SBPickerSelector = SBPickerSelector.picker()
         
-        var restMessage = RestMessage()
+        let restMessage = RestMessage()
         
-        var post: NSString = restMessage.getMessageCategory(key,paramToken: token,paramCountry: constants.country)
+        let post: NSString = restMessage.getMessageCategory(key,paramToken: token,paramCountry: constants.country)
         
         arrayCategory = categoryManager.getCategories(post, serviceToBaseUrl: constants.serviceCategories)
         var arrayPicker:[String] = []
         
         for var index = 0; index < arrayCategory.count; index++ {
-            var descriptionCategory:NSDictionary = arrayCategory[index]
-            var description:NSString = descriptionCategory.objectForKey("description") as! NSString
+            let descriptionCategory:NSDictionary = arrayCategory[index]
+            let description:NSString = descriptionCategory.objectForKey("description") as! NSString
             arrayPicker.append(description as String)
         }
         
@@ -177,16 +177,16 @@ class UpdateUserVC: UIViewController, SBPickerSelectorDelegate, UITextFieldDeleg
         pickerSelected=1
         let picker: SBPickerSelector = SBPickerSelector.picker()
         
-        var restMessage = RestMessage()
+        let restMessage = RestMessage()
         
-        var post: NSString = restMessage.getMessagePosition(key , paramToken: token, paramCountry: constants.country)
+        let post: NSString = restMessage.getMessagePosition(key , paramToken: token, paramCountry: constants.country)
         
         arrayPosition = categoryManager.getCategories(post, serviceToBaseUrl: constants.servicePosition)
         var arrayPicker:[String] = []
         
         for var index = 0; index < arrayPosition.count; index++ {
-            var descriptionCategory:NSDictionary = arrayPosition[index]
-            var description:NSString = descriptionCategory.objectForKey("description") as! NSString
+            let descriptionCategory:NSDictionary = arrayPosition[index]
+            let description:NSString = descriptionCategory.objectForKey("description") as! NSString
             arrayPicker.append(description as String)
         }
         
@@ -224,17 +224,17 @@ class UpdateUserVC: UIViewController, SBPickerSelectorDelegate, UITextFieldDeleg
         pickerSelected = 3
         let picker: SBPickerSelector = SBPickerSelector.picker()
         
-        var restMessage = RestMessage()
+        let restMessage = RestMessage()
         
         
-        var post: NSString = restMessage.getMessageCountry(key,paramToken: token,paramCountry: constants.country)
+        let post: NSString = restMessage.getMessageCountry(key,paramToken: token,paramCountry: constants.country)
         
         arrayCountry = countryManager.getCountry(post, serviceToBaseUrl: constants.serviceGetCountries)
         var arrayPicker:[String] = []
         
         for var index = 0; index < arrayCountry.count; index++ {
-            var descriptionCountry:NSDictionary = arrayCountry[index]
-            var description:NSString = descriptionCountry.objectForKey("description") as! NSString
+            let descriptionCountry:NSDictionary = arrayCountry[index]
+            let description:NSString = descriptionCountry.objectForKey("description") as! NSString
             arrayPicker.append(description as String)
         }
        
@@ -315,18 +315,18 @@ class UpdateUserVC: UIViewController, SBPickerSelectorDelegate, UITextFieldDeleg
         } else {*/
         
         
-        var imageBase : UIImage = UIImage(named:"YourChallenge_Alert_Green")!
+        let imageBase : UIImage = UIImage(named:"YourChallenge_Alert_Green")!
         
-        var cgsizeapp = CGSizeMake(1, 1)
+        let cgsizeapp = CGSizeMake(1, 1)
         
-        var imageData = UIImagePNGRepresentation(imageWithSize(imageBase, size:  cgsizeapp))
+        let imageData = UIImagePNGRepresentation(imageWithSize(imageBase, size:  cgsizeapp))
 
-        let base64String = imageData.base64EncodedStringWithOptions(.allZeros)
+        let base64String = imageData!.base64EncodedStringWithOptions([])
         
 
-        var post:NSString = restMessage.getMessageChanceImage(userName, paramToken:  token as String, paramKey: key as String , paramCountry: constants.country as String, base64Image: base64String, descriptionImage: "test", extensionImage: "jpg", typeImage: "P")
+        let post:NSString = restMessage.getMessageChanceImage(userName, paramToken:  token as String, paramKey: key as String , paramCountry: constants.country as String, base64Image: base64String, descriptionImage: "test", extensionImage: "jpg", typeImage: "P")
         
-        var authenticationMessage:NSString = updateUserManager.postUpdateUser(post as String, serviceToBaseUrl: constants.serviceAddImage)
+        let authenticationMessage:NSString = updateUserManager.postUpdateUser(post as String, serviceToBaseUrl: constants.serviceAddImage)
         
         
         //updateUserManager.postUpdateUser(post as String , serviceToBaseUrl: constants.servicePosition)
@@ -336,7 +336,7 @@ class UpdateUserVC: UIViewController, SBPickerSelectorDelegate, UITextFieldDeleg
                     //Validación fallida o éxitosa de la petición Login
                     if(authenticationMessage == "success")
                     {
-                        var alertView:UIAlertView = UIAlertView()
+                        let alertView:UIAlertView = UIAlertView()
                         
                         alertView.title = "Acción"
                         alertView.message = "Actualizado" as String
@@ -346,7 +346,7 @@ class UpdateUserVC: UIViewController, SBPickerSelectorDelegate, UITextFieldDeleg
                         
                     } else {
                         
-                        var alertView:UIAlertView = UIAlertView()
+                        let alertView:UIAlertView = UIAlertView()
                         
                         alertView.title = "Ingreso incorrecto"
                         alertView.message = authenticationMessage as String
@@ -370,7 +370,7 @@ class UpdateUserVC: UIViewController, SBPickerSelectorDelegate, UITextFieldDeleg
         }
         
         image.drawInRect(CGRectMake(0, 0, size.width, size.height));
-        var newImage = UIGraphicsGetImageFromCurrentImageContext();
+        let newImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         
         return newImage;

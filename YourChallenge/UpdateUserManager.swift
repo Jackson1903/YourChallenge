@@ -15,14 +15,20 @@ class UpdateUserManager:RestClientMessage{
     
 func postUpdateUser(post: String, serviceToBaseUrl: NSString) -> NSString
 {
-    var restClientMss = RestClientMessage()
-    var baseUrl:String = constants.baseURL + (serviceToBaseUrl as String)
+    let restClientMss = RestClientMessage()
+    let baseUrl:String = constants.baseURL + (serviceToBaseUrl as String)
     var reponseError: NSError?
     var response: NSURLResponse?
     var resultMessage:NSString = ""
     
-    var request:NSMutableURLRequest = restClientMss.getConnection(baseUrl, paramPost:post)
-    var urlData: NSData? = NSURLConnection.sendSynchronousRequest(request, returningResponse:&response, error:&reponseError)
+    let request:NSMutableURLRequest = restClientMss.getConnection(baseUrl, paramPost:post)
+    var urlData: NSData?
+    do {
+        urlData = try NSURLConnection.sendSynchronousRequest(request, returningResponse:&response)
+    } catch let error as NSError {
+        reponseError = error
+        urlData = nil
+    }
     
     if  urlData != nil  {
         
@@ -33,7 +39,7 @@ func postUpdateUser(post: String, serviceToBaseUrl: NSString) -> NSString
             var responseData:NSString  = NSString(data:urlData!, encoding:NSUTF8StringEncoding)!
             var error: NSError?
             
-            let jsonData:NSDictionary = NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers , error: &error) as! NSDictionary
+            let jsonData:NSDictionary = (try! NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers )) as! NSDictionary
             
             //Obtiene información Header
             let header:NSDictionary = jsonData.valueForKey("header") as! NSDictionary

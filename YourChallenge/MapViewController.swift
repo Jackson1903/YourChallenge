@@ -102,7 +102,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         map.addAnnotation(annotation3)*/
         
-        var uilpgr = UILongPressGestureRecognizer(target: self, action: "action:")
+        let uilpgr = UILongPressGestureRecognizer(target: self, action: "action:")
         
         uilpgr.minimumPressDuration = 2
         
@@ -112,13 +112,13 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
     func action(gestureRecognizer: UIGestureRecognizer) {
         
-        println("Gesture Recognized")
+        print("Gesture Recognized")
         
-        var touchPoint = gestureRecognizer.locationInView(self.map)
+        let touchPoint = gestureRecognizer.locationInView(self.map)
         
-        var newCoordinate: CLLocationCoordinate2D = map.convertPoint(touchPoint, toCoordinateFromView: self.map)
+        let newCoordinate: CLLocationCoordinate2D = map.convertPoint(touchPoint, toCoordinateFromView: self.map)
         
-        var annotation = MKPointAnnotation()
+        let annotation = MKPointAnnotation()
         
         annotation.coordinate = newCoordinate
         

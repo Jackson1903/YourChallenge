@@ -41,10 +41,10 @@ class SignupVC: UIViewController {
     
     @IBAction func signupTapped(sender : UIButton) {
         
-        var username:NSString = txtUsername.text as NSString
-        var password:NSString = txtPassword.text as NSString
-        var confirm_password:NSString = txtConfirmPassword.text as NSString
-        var email:NSString = txtEmail.text as NSString
+        let username:NSString = txtUsername.text! as NSString
+        let password:NSString = txtPassword.text! as NSString
+        let confirm_password:NSString = txtConfirmPassword.text! as NSString
+        let email:NSString = txtEmail.text! as NSString
     
         
         var lgConnection = LoginManager()
@@ -52,7 +52,7 @@ class SignupVC: UIViewController {
         
         if ( username.isEqualToString("") || password.isEqualToString("") ) {
             
-            var alertView:UIAlertView = UIAlertView()
+            let alertView:UIAlertView = UIAlertView()
             alertView.title = "Fallo en el Registro"
             alertView.message = "Por favor ingrese su nombre de usuario y contraseña"
             alertView.delegate = self
@@ -60,7 +60,7 @@ class SignupVC: UIViewController {
             alertView.show()
         } else if ( !password.isEqual(confirm_password) ) {
             
-            var alertView:UIAlertView = UIAlertView()
+            let alertView:UIAlertView = UIAlertView()
             alertView.title = "Fallo en el Registro"
             alertView.message = "Por favor ingrese su nombre de usuario y contraseña"
             alertView.delegate = self
@@ -68,12 +68,12 @@ class SignupVC: UIViewController {
             alertView.show()
         } else {
             
-            var sgConnection = SingupManager()
-            var restMessage = RestMessage()
+            let sgConnection = SingupManager()
+            let restMessage = RestMessage()
             
-            var post:NSString = restMessage.getMessageSingUp(username, paramPassword: password, paramEmail: email)
+            let post:NSString = restMessage.getMessageSingUp(username, paramPassword: password, paramEmail: email)
             
-            var authenticationMessage:NSString = sgConnection.signUpUser(post, serviceToBaseUrl: constants.baseURL)
+            let authenticationMessage:NSString = sgConnection.signUpUser(post, serviceToBaseUrl: constants.baseURL)
             
             if(authenticationMessage == "success")
             {
@@ -81,7 +81,7 @@ class SignupVC: UIViewController {
                 
             } else {
                 
-                var alertView:UIAlertView = UIAlertView()
+                let alertView:UIAlertView = UIAlertView()
                 
                 alertView.title = "Ingreso incorrecto"
                 alertView.message = authenticationMessage as String

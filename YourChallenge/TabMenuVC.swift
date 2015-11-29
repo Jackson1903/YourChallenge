@@ -50,24 +50,24 @@ class TabMenu: UINavigationController {
         
         // 2
         let JuventusAction = UIAlertAction(title: "Juventus FC", style: .Default, handler: {
-            (alert: UIAlertAction!) -> Void in
-            println("Equipo")
+            (alert: UIAlertAction) -> Void in
+            print("Equipo")
         })
         let VillasAction = UIAlertAction(title: "Villas FC", style: .Default, handler: {
-            (alert: UIAlertAction!) -> Void in
-            println("Equipo")
+            (alert: UIAlertAction) -> Void in
+            print("Equipo")
         })
         
         let OtherAction = UIAlertAction(title: "...", style: .Default, handler: {
-            (alert: UIAlertAction!) -> Void in
+            (alert: UIAlertAction) -> Void in
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewControllerWithIdentifier("NewTeamVC") as! UIViewController
+            let vc = storyboard.instantiateViewControllerWithIdentifier("NewTeamVC") 
             self.navigationController?.pushViewController(vc, animated: true)
         })
         //
         let cancelAction = UIAlertAction(title: "Cancelar", style: .Cancel, handler: {
-            (alert: UIAlertAction!) -> Void in
-            println("Cancelled")
+            (alert: UIAlertAction) -> Void in
+            print("Cancelled")
         })
         
         

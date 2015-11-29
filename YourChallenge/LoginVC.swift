@@ -33,11 +33,11 @@ class LoginVC:UIViewController,UITextFieldDelegate {
     
     @IBAction func signinTapped(sender : UIButton) {
         
-        var username:NSString = txtUsername.text
-        var password:NSString = txtPassword.text
+        let username:NSString = txtUsername.text!
+        let password:NSString = txtPassword.text!
         
         if ( username.isEqualToString("") || password.isEqualToString("") ) {
-            var alertView:UIAlertView = UIAlertView()
+            let alertView:UIAlertView = UIAlertView()
             alertView.title = "Fallo en el Ingreso"
             alertView.message = "Por favor ingrese su nombre de usuario y contraseña"
             alertView.delegate = self
@@ -46,20 +46,20 @@ class LoginVC:UIViewController,UITextFieldDelegate {
        
         } else {
            
-            var lgConnection = LoginManager()
-            var restMessage = RestMessage()
+            let lgConnection = LoginManager()
+            let restMessage = RestMessage()
             
             
-            var post:NSString = restMessage.getMessageLogin(username, paramPassword: password, paramCountry: constants.country)
+            let post:NSString = restMessage.getMessageLogin(username, paramPassword: password, paramCountry: constants.country)
             
-            var authenticationMessage:NSString = lgConnection.getLoginUser(post as String, serviceToBaseUrl:constants.serviceLogin as String)
+            let authenticationMessage:NSString = lgConnection.getLoginUser(post as String, serviceToBaseUrl:constants.serviceLogin as String)
             
             if(authenticationMessage == "success")
             {
                 self.dismissViewControllerAnimated(true, completion: nil)
                 
             } else {
-                var alertView:UIAlertView = UIAlertView()
+                let alertView:UIAlertView = UIAlertView()
                 
                 alertView.title = "Ingreso incorrecto"
                 alertView.message = authenticationMessage as String

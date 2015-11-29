@@ -18,15 +18,21 @@ class PositionManager:RestClientMessage{
     
     func getPositions( post: NSString, serviceToBaseUrl: String ) -> [NSDictionary] {
         
-        var restClientMss = RestClientMessage()
-        var baseUrl:String = constants.baseURL+(serviceToBaseUrl as String)
+        let restClientMss = RestClientMessage()
+        let baseUrl:String = constants.baseURL+(serviceToBaseUrl as String)
         var reponseError: NSError?
         var response: NSURLResponse?
         var country:CountryModel
         
         
-        var request:NSMutableURLRequest = restClientMss.getConnection(baseUrl, paramPost:post as String)
-        var urlData: NSData? = NSURLConnection.sendSynchronousRequest(request, returningResponse:&response, error:&reponseError)
+        let request:NSMutableURLRequest = restClientMss.getConnection(baseUrl, paramPost:post as String)
+        var urlData: NSData?
+        do {
+            urlData = try NSURLConnection.sendSynchronousRequest(request, returningResponse:&response)
+        } catch let error as NSError {
+            reponseError = error
+            urlData = nil
+        }
         
         if  urlData != nil  {
             
@@ -37,7 +43,7 @@ class PositionManager:RestClientMessage{
                 var responseData:NSString  = NSString(data:urlData!, encoding:NSUTF8StringEncoding)!
                 var error: NSError?
                 
-                let jsonData:NSDictionary = NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers , error: &error) as! NSDictionary
+                let jsonData:NSDictionary = (try! NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers )) as! NSDictionary
                 
                 //Obtiene información Header
                 let header:NSDictionary = jsonData.valueForKey("header") as! NSDictionary

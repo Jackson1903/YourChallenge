@@ -435,7 +435,9 @@
 		F47029E81A7F27DB00E30A3C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastSwiftMigration = 0710;
+				LastSwiftUpdateCheck = 0710;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = APPStions;
 				TargetAttributes = {
 					F47029EF1A7F27DB00E30A3C = {
@@ -616,6 +618,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -681,6 +684,7 @@
 				INFOPLIST_FILE = YourChallenge/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.appstions.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = YourChallenge;
 				SWIFT_OBJC_BRIDGING_HEADER = "YourChallenge/SidebarMenu-Bridging-Header.h";
 				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "YourChallenge/SidebarMenu-Bridging-Header.h";
@@ -696,6 +700,7 @@
 				INFOPLIST_FILE = YourChallenge/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.appstions.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = YourChallenge;
 				SWIFT_OBJC_BRIDGING_HEADER = "YourChallenge/SidebarMenu-Bridging-Header.h";
 				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "YourChallenge/SidebarMenu-Bridging-Header.h";
@@ -716,6 +721,7 @@
 				);
 				INFOPLIST_FILE = YourChallengeTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.appcoda.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = YourChallengeTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/YourChallenge.app/YourChallenge";
 			};
@@ -731,6 +737,7 @@
 				);
 				INFOPLIST_FILE = YourChallengeTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.appcoda.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = YourChallengeTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/YourChallenge.app/YourChallenge";
 			};

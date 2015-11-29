@@ -15,14 +15,14 @@ class RestClientMessage:NSObject,NSURLSessionDelegate,NSURLSessionTaskDelegate,N
     func getConnection(paramBaseURL: String, paramPost: String) -> NSMutableURLRequest
     {
         //Building Message Request
-        var post:NSString = paramPost
+        let post:NSString = paramPost
         
         //Variable  URL servicios
-        var url:NSURL = NSURL(string:paramBaseURL)!
+        let url:NSURL = NSURL(string:paramBaseURL)!
         //Variables conexión servicios
-        var postData:NSData = post.dataUsingEncoding(NSASCIIStringEncoding)!
-        var postLength:NSString = String( postData.length )
-        var request:NSMutableURLRequest = NSMutableURLRequest(URL: url)
+        let postData:NSData = post.dataUsingEncoding(NSASCIIStringEncoding)!
+        let postLength:NSString = String( postData.length )
+        let request:NSMutableURLRequest = NSMutableURLRequest(URL: url)
         request.HTTPMethod = "POST"
         request.HTTPBody = postData
         request.setValue(postLength as String, forHTTPHeaderField: "Content-Length")
